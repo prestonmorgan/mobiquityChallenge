@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Bigfoot Watch</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_description">Capture and upload shots of the big guy in action.</string>
+    <string name="camera_button">Camera</string>
+    <string name="title_activity_upload">Upload</string>
+    <string name="upload_title">Upload Photo?</string>
+    <string name="upload_button">Upload</string>
+</resources>
