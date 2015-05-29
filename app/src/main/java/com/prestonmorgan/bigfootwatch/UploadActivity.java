@@ -1,5 +1,6 @@
 package com.prestonmorgan.bigfootwatch;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
@@ -73,20 +75,30 @@ public class UploadActivity extends ActionBarActivity {
         new UploadPhotoTask().execute(mCurrentPhotoPath);
     }
 
-    private class UploadPhotoTask extends AsyncTask<String, Void, Void> {
-        protected Void doInBackground(String... path) {
+    private class UploadPhotoTask extends AsyncTask<String, Void, Boolean> {
+        protected Boolean doInBackground(String... path) {
             File file = new File(path[0]);
             try {
                 FileInputStream inputStream = new FileInputStream(file);
                 mDBApi.putFile("/" + file.getName(), inputStream, file.length(), null, null);
+                return true;
             } catch (Exception e) {
-                //For some reason, I keep getting ENOENT when trying to open file.
                 Log.e("PhotoUpload", e.getMessage());
+                return false;
             }
-            return null;
         }
 
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(Boolean success) {
+            Context context = getApplicationContext();
+            CharSequence text;
+            if (success) {
+                text = "Photo successfully uploaded";
+            } else {
+                text = "Something went wrong with uploading your photo.";
+            }
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast.makeText(context, text, duration).show();
             finish();
         }
     }

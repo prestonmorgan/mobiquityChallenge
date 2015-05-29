@@ -61,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    //From https://developer.android.com/training/camera/photobasics.html
+    //Modified slightly from https://developer.android.com/training/camera/photobasics.html
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -69,8 +69,7 @@ public class MainActivity extends ActionBarActivity {
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
 
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
 
@@ -92,5 +91,10 @@ public class MainActivity extends ActionBarActivity {
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
         }
+    }
+
+    public void onGalleryClick(View view) {
+        Intent intent = new Intent(this, GalleryActivity.class);
+        startActivity(intent);
     }
 }

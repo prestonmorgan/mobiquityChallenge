@@ -6,4 +6,10 @@
     <string name="title_activity_upload">Upload</string>
     <string name="upload_title">Upload Photo?</string>
     <string name="upload_button">Upload</string>
+    <string name="gallery_button">Gallery</string>
+    <string name="title_activity_gallery">GalleryActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="gallery_title">Your Uploads</string>
+    <string name="title_activity_photo">PhotoActivity</string>
 </resources>
